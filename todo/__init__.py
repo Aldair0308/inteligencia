@@ -22,12 +22,13 @@ def create_app():
     from . import auth
     app.register_blueprint(auth.bp)
 
-    @app.route('/hola')
-    def hola():
-        return 'Esto es un mensaje para Axel'
-    
-    @app.route('/welcome')
+    @app.route('/')
     def welcome():
         return render_template('welcome.html')
+    
+    @app.route('/ingresar')
+    def hola():
+        return render_template('base.html')
+    
 
     return app
