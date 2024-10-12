@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 def create_app():
     app = Flask(__name__)
@@ -22,13 +22,27 @@ def create_app():
     from . import auth
     app.register_blueprint(auth.bp)
 
+    
+        
     @app.route('/')
     def welcome():
-        return render_template('welcome.html')
+        return render_template('welcome.html', current='home')
     
     @app.route('/ingresar')
     def hola():
-        return render_template('base.html')
+        return render_template('base.html', current='ingresar')
+    
+    @app.route('/ajustes')
+    def ajustes():
+        return render_template('ajustes.html', current='ajustes')
+    
+    @app.route('/sopa')
+    def sopa():
+        return render_template('sopa.html', current='sopa')
+    
+    @app.route('/imagen')
+    def imagen():
+        return render_template('imagen.html', current='imagen')
     
 
     return app
