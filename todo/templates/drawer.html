@@ -1,4 +1,5 @@
-<div class="sidebar">
+<div class="sidebar" id="sidebar">
+    <button id="close-button" class="close-btn">×</button>
     <img src="{{ url_for('static', filename='assets/logo.jpg') }}" alt="Logo" class="logo">
     <div class="menu">
         <a href="/" class="{% if current == 'home' %}active{% endif %}">Inicio</a>
@@ -8,39 +9,87 @@
     </div>
 </div>
 
+<div id="overlay" class="overlay hidden"></div>
+
+<button id="open-button" class="open-btn hidden">&#9776;</button> <!-- Ícono de hamburguesa -->
+
 <style>
-    /* Estilos para la barra lateral */
     .sidebar {
         max-width: 300px;
-        flex: 1;
         width: 250px;
-        background-color: rgb(0, 122, 255); /* Azul */
+        background-color: rgb(0, 122, 255);
         color: white;
         padding: 20px;
         box-sizing: border-box;
-        display: flex;
-        flex-direction: column;
-        height: 100vh; /* Asegura que la barra lateral ocupe toda la altura */
+        height: 100vh;
+        position: fixed;
+        left: 0;
+        top: 0;
+        transition: transform 0.3s ease;
+        transform: translateX(0); /* Visible al inicio */
+        z-index: 10;
     }
 
-    /* Logo */
+    .hidden {
+        transform: translateX(-100%); /* Fuera de la vista */
+    }
+
+    .close-btn {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 24px;
+        cursor: pointer;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: transparent; /* Cambiado a transparente */
+        z-index: 5;
+    }
+
+    .open-btn {
+        position: fixed;
+        top: 20px;
+        left: -100px; /* Mueve el botón fuera de la vista por defecto */
+        background-color: rgb(0, 122, 255);
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        z-index: 10;
+        font-size: 24px;
+        transition: left 0.3s ease; /* Suaviza la transición de la posición */
+    }
+
+    /* Mostrar el botón al cerrar el drawer */
+    .open-btn.visible {
+        left: 80px; /* Posición visible del botón cuando el drawer está cerrado */
+    }
+
     .logo {
-        max-width: 100%; /* Asegura que el logo no desborde */
-        height: auto; /* Mantiene la proporción del logo */
+        margin-top: 10%;
+        max-width: 100%;
+        height: auto;
         text-align: center;
-        margin-bottom: 20px; /* Separación entre el logo y los enlaces */
+        margin-bottom: 20px;
     }
 
-    /* Contenedor de las opciones de menú */
     .menu {
-        flex-grow: 1;
+        margin-top: 40%;
         display: flex;
         flex-direction: column;
-        justify-content: center; /* Centra los elementos verticalmente */
-        align-items: center; /* Centra los elementos horizontalmente */
+        align-items: center;
     }
 
-    /* Enlaces */
     .sidebar a {
         color: white;
         text-decoration: none;
@@ -50,20 +99,19 @@
         border-radius: 5px;
         text-align: center;
         transition: background-color 0.3s ease;
-        width: 100%; /* Los enlaces ocupan todo el ancho de la barra lateral */
+        width: 100%;
     }
 
     .sidebar a:hover {
         background-color: rgb(0, 78, 200);
     }
 
-    /* Estilos para el recuadro de AJUSTES */
     .ajustes {
         color: white;
         text-decoration: none;
         padding: 10px;
         margin: 10px 0;
-        background: linear-gradient(145deg, #ff6f00, #ff9600); /* Gradiente naranja */
+        background: linear-gradient(145deg, #ff6f00, #ff9600);
         border-radius: 10px;
         text-align: center;
         font-weight: bold;
@@ -72,15 +120,63 @@
     }
 
     .ajustes:hover {
-        background: linear-gradient(145deg, #ff9600, #ff6f00); /* Gradiente invertido al pasar el mouse */
-        box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.5); /* Sombra más intensa en hover */
+        background: linear-gradient(145deg, #ff9600, #ff6f00);
+        box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.5);
     }
 
-    /* Aumentar la especificidad para el enlace activo */
     .sidebar a.active {
-        font-weight: bold; /* Puedes agregar estilos adicionales */
-        font-size: xx-large; /* Cambia el tamaño de la fuente */
-        background-color: rgb(72, 255, 0); /* Color de fondo para el enlace activo */
-        color: white; /* Color del texto */
+        font-weight: bold;
+        font-size: large;
+        background-color: rgb(187, 22, 137);
+        color: white;
+    }
+
+    .content {
+        flex-grow: 1;
+        padding: 20px;
+        background-color: rgb(255, 255, 255);
+        box-sizing: border-box;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        margin-left: 250px; /* Ancho del sidebar al inicio */
+        transition: margin-left 0.3s ease; /* Transición suave */
+    }
+
+    .content.without-sidebar {
+        margin-left: 0; /* Ancho del sidebar cerrado */
     }
 </style>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const sidebar = document.getElementById('sidebar');
+        const closeButton = document.getElementById('close-button');
+        const overlay = document.getElementById('overlay');
+        const openButton = document.getElementById('open-button');
+        const content = document.querySelector('.content');
+
+        closeButton.addEventListener('click', function() {
+            sidebar.classList.add('hidden');
+            overlay.classList.add('hidden');
+            openButton.classList.add('visible'); // Mostrar el botón en la posición visible
+            content.classList.add('without-sidebar'); // Ajustar contenido
+        });
+
+        openButton.addEventListener('click', function() {
+            sidebar.classList.remove('hidden');
+            overlay.classList.remove('hidden');
+            openButton.classList.remove('visible'); // Ocultar el botón al abrir el menú
+            content.classList.remove('without-sidebar'); // Ajustar contenido
+        });
+
+        overlay.addEventListener('click', function() {
+            sidebar.classList.add('hidden');
+            overlay.classList.add('hidden');
+            openButton.classList.add('visible'); // Mostrar el botón en la posición visible
+            content.classList.add('without-sidebar'); // Ajustar contenido
+        });
+    });
+</script>

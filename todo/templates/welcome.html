@@ -1,4 +1,3 @@
-<!-- templates/welcome.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bienvenido</title>
     <style>
-        /* Estilos generales para el cuerpo */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -16,22 +14,26 @@
             background-color: rgb(255, 234, 0); /* Amarillo */
         }
 
-        /* Contenedor principal */
         .container {
             display: flex;
             width: 100%;
         }
 
-        /* Contenido principal */
         .content {
             flex-grow: 1;
             padding: 20px;
             background-color: rgb(255, 255, 255);
             box-sizing: border-box;
             display: flex;
-            justify-content: center; /* Centra el contenido horizontalmente */
-            align-items: center; /* Centra el contenido verticalmente */
+            justify-content: center;
+            align-items: center;
             text-align: center;
+            margin-left: 250px; /* Ancho del sidebar al inicio */
+            transition: margin-left 0.3s ease; /* Transición suave */
+        }
+
+        .content.without-sidebar {
+            margin-left: 0; /* Ancho del sidebar cerrado */
         }
 
         .content h1 {
