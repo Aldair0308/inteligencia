@@ -1,50 +1,22 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ajustes</title>
-    <style>
-                                /* Estilos generales para el cuerpo */
-                                body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            height: 100vh;
-            background-color: rgb(255, 234, 0); /* Amarillo */
-        }
+    <title>Ajustes</title>
 
-        /* Contenedor principal */
-        .container {
-            display: flex;
-            width: 100%;
-        }
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 
-        /* Contenido principal */
-        .content {
-            flex-grow: 1;
-            padding: 20px;
-            background-color: rgb(255, 255, 255);
-            box-sizing: border-box;
-            display: flex;
-            justify-content: center; /* Centra el contenido horizontalmente */
-            align-items: center; /* Centra el contenido verticalmente */
-            text-align: center;
-        }
-
-        .content h1 {
-            margin-top: 0;
-        }
-    </style>
 </head>
 <body>
     <div class="container">
         {% include 'drawer.html' %}
         <div class="content">
             <div>
-                <h1>Bienvenido a los ajustes</h1>
-                <p>Selecciona una opción del menú para ver el contenido aquí.</p>
+                <h1>Ajustes</h1>
+                <p>Selecciona los ajustes   </p>
+
             </div>
         </div>
     </div>

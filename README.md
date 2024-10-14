@@ -29,3 +29,28 @@
 # Activa el debug mode
 
 - export FLASK_DEBUG=1
+
+<!-- PLANTILLA DE SCREENS DE HTML -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenido</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+
+</head>
+<body>
+    <div class="container">
+        {% include 'drawer.html' %}
+        <div class="content">
+            <div>
+                <h1>Bienvenido al Panel de Control</h1>
+                <p>Selecciona una opción del menú para ver el contenido aquí.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

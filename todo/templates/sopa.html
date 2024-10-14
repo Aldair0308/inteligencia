@@ -4,39 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sopa de letras</title>
-    <style>
-                /* Estilos generales para el cuerpo */
-                body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            height: 100vh;
-            background-color: rgb(255, 234, 0); /* Amarillo */
-        }
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 
-        /* Contenedor principal */
-        .container {
-            display: flex;
-            width: 100%;
-        }
-
-        /* Contenido principal */
-        .content {
-            flex-grow: 1;
-            padding: 20px;
-            background-color: rgb(255, 255, 255);
-            box-sizing: border-box;
-            display: flex;
-            justify-content: center; /* Centra el contenido horizontalmente */
-            align-items: center; /* Centra el contenido verticalmente */
-            text-align: center;
-        }
-
-        .content h1 {
-            margin-top: 0;
-        }
-    </style>
 </head>
 <body>
     <div class="container">

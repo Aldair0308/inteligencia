@@ -1,12 +1,19 @@
 <div class="sidebar" id="sidebar">
     <button id="close-button" class="close-btn">&#9776;</button>
-    <img src="{{ url_for('static', filename='assets/logo.jpg') }}" alt="Logo" class="logo">
+    <img id="logo" src="{{ url_for('static', filename='assets/logo.jpg') }}" alt="Logo" class="logo" style="cursor: pointer;">
+
+    
     <div class="menu">
-        <a href="/" class="{% if current == 'home' %}active{% endif %}">Inicio</a>
+        <a href="/inicio" class="{% if current == 'home' %}active{% endif %}">Inicio</a>
         <a href="/sopa" class="{% if current == 'sopa' %}active{% endif %}">Sopa de Letras</a>
         <a href="/imagen" class="{% if current == 'imagen' %}active{% endif %}">Crear Mandala</a>
         <a href="/ajustes" class="{% if current == 'ajustes' %}active{% endif %} ajustes">AJUSTES</a>
     </div>
+
+    <button id="fullscreen-button" class="fullscreen-btn">🌐 Pantalla Completa</button>
+
+    
+
 </div>
 
 <link rel="stylesheet" href="{{ url_for('static', filename='css/drawer.css') }}">
@@ -44,4 +51,23 @@
             content.classList.add('without-sidebar'); // Ajustar contenido
         });
     });
+</script>
+
+<script>
+    document.getElementById('logo').onclick = function() {
+        window.location.href = '/';
+    };
+</script>
+
+<script>
+    document.getElementById('fullscreen-button').addEventListener('click', function() {
+    if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(err => {
+            console.error(`Error al intentar activar pantalla completa: ${err.message} (${err.name})`);
+        });
+    } else {
+        document.exitFullscreen();
+    }
+});
+
 </script>

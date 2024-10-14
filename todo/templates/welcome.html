@@ -4,50 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bienvenido</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            height: 100vh;
-            /* background-color: rgb(255, 234, 0); Amarillo */
-        }
 
-        .container {
-            display: flex;
-            width: 100%;
-        }
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/welcome.css') }}">
+    
 
-        .content {
-            flex-grow: 1;
-            padding: 20px;
-            background-color: rgb(255, 255, 255);
-            box-sizing: border-box;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            margin-left: 250px; /* Ancho del sidebar al inicio */
-            transition: margin-left 0.3s ease; /* Transición suave */
-        }
-
-        .content.without-sidebar {
-            margin-left: 0; /* Ancho del sidebar cerrado */
-        }
-
-        .content h1 {
-            margin-top: 0;
-        }
-    </style>
 </head>
 <body>
     <div class="container">
-        {% include 'drawer.html' %}
         <div class="content">
             <div>
-                <h1>Bienvenido al Panel de Control</h1>
+                <h1>Welcome to pintor</h1>
                 <p>Selecciona una opción del menú para ver el contenido aquí.</p>
+                <a href="/inicio">Ingresar</a>
+                <a href="/ingresar">Inicia Sesión</a>
+
             </div>
         </div>
     </div>

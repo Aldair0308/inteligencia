@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, request
+from flask import Flask, render_template
 
 def create_app():
     app = Flask(__name__)
@@ -26,7 +26,11 @@ def create_app():
         
     @app.route('/')
     def welcome():
-        return render_template('welcome.html', current='home')
+        return render_template('welcome.html')
+    
+    @app.route('/inicio')
+    def inicio():
+        return render_template('inicio.html', current='home')
     
     @app.route('/ingresar')
     def hola():

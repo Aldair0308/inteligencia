@@ -20,13 +20,21 @@
 
 .close-btn {
   background: none;
-  border: none;
+  border: "black" solid 1px;
   color: white;
   font-size: 24px;
   cursor: pointer;
   position: absolute;
   top: 10px;
   right: 10px;
+  margin: 2px;
+  border-radius: 10px;
+}
+
+.close-btn:hover {
+  background: rgba(255, 255, 255, 0.2); /* Fondo semi-transparente */
+  color: rgb(255, 255, 255); /* Cambia el color del texto al pasar el ratón */
+  border-color: white; /* Cambia el color del borde al pasar el ratón */
 }
 
 .overlay {
@@ -87,7 +95,9 @@
 }
 
 .sidebar a:hover {
-  background-color: rgb(0, 78, 200);
+  background: linear-gradient(145deg, #83ff6a, #1b8817);
+
+  box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.5);
 }
 
 .ajustes {
@@ -109,10 +119,9 @@
 }
 
 .sidebar a.active {
-  font-weight: bold;
-  font-size: large;
-  background-color: rgb(187, 22, 137);
-  color: white;
+  background-color: #1a25c0;
+  border: #08183b solid 3px;
+  margin: 12px;
 }
 
 .content {
@@ -130,4 +139,20 @@
 
 .content.without-sidebar {
   margin-left: 0; /* Ancho del sidebar cerrado */
+}
+
+.fullscreen-btn {
+  background-color: rgb(0, 122, 255);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px; /* Espacio adicional */
+  transition: background-color 0.3s ease;
+}
+
+.fullscreen-btn:hover {
+  background-color: rgb(0, 98, 255);
 }

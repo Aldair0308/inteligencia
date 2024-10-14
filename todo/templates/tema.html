@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modo Oscuro</title>
+    <style>
+        /* Estilos por defecto (modo claro) */
+        body {
+            background-color: white;
+            color: black;
+            font-family: Arial, sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .sidebar {
+            background-color: rgb(0, 122, 255);
+            padding: 20px;
+            box-sizing: border-box;
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            transition: background-color 0.3s;
+        }
+
+        /* Estilos para el modo oscuro */
+        body.dark-mode {
+            background-color: #121212;
+            color: white;
+        }
+
+        body.dark-mode .sidebar {
+            background-color: #1e1e1e;
+        }
+
+        .theme-toggle-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: rgb(0, 122, 255);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .theme-toggle-btn:hover {
+            background-color: rgb(0, 98, 255);
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h1>Menu</h1>
+        <a href="#inicio">Inicio</a>
+        <a href="#sopa">Sopa de Letras</a>
+        <a href="#imagen">Crear Mandala</a>
+        <a href="#ajustes">Ajustes</a>
+    </div>
+
+    <button id="theme-toggle" class="theme-toggle-btn">🌙 Cambiar a Modo Oscuro</button>
+
+    <script>
+        const themeToggleButton = document.getElementById('theme-toggle');
+
+        themeToggleButton.addEventListener('click', function() {
+            document.body.classList.toggle('dark-mode');
+            if (document.body.classList.contains('dark-mode')) {
+                themeToggleButton.textContent = '☀️ Cambiar a Modo Claro';
+            } else {
+                themeToggleButton.textContent = '🌙 Cambiar a Modo Oscuro';
+            }
+        });
+    </script>
+</body>
+</html>
