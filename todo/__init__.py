@@ -13,8 +13,7 @@ def create_app():
         DATABASE='todo',
     )
 
-    app.config['DEBUG'] = True  # Ahora puedes configurar el modo de depuración
-
+    # Clave de OpenAI
 
     from . import db
     db.init_app(app)
