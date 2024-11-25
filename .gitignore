@@ -1,1 +1,6 @@
 venv/
+
+# Ignorar archivos con información sensible
+todo/__init__.py
+todo/__pycache__/
+*.pyc
